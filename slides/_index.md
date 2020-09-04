@@ -1,23 +1,33 @@
-﻿(**
-- title : FsReveal 
+- title : FsReveal
 - description : Introduction to FsReveal
 - author : Karlkim Suwanmongkol
-- theme : Sky
+- theme : night
 - transition : default
 
 ***
-
+<section data-auto-animate>
+  <h1 style="margin-top: 100px;">Auto</h1>
+  <h1 style="opacity: 0;">Animate</h1>
+</section>
+<section data-auto-animate>
+  <h1>Auto</h1>
+  <h1>Animate</h1>
+</section>
 ### What is FsReveal?
 
 - Generates [reveal.js](http://lab.hakim.se/reveal-js/#/) presentation from [markdown](http://daringfireball.net/projects/markdown/)
 - Utilizes [FSharp.Formatting](https://github.com/tpetricek/FSharp.Formatting) for markdown parsing
+- Get it from [http://fsprojects.github.io/FsReveal/](http://fsprojects.github.io/FsReveal/)
+
+![FsReveal](images/logo.png)
 
 ***
 
 ### Reveal.js
 
-- A framework for easily creating beautiful presentations using HTML.  
-  
+- A framework for easily creating beautiful presentations using HTML.
+
+
 > **Atwood's Law**: any application that can be written in JavaScript, will eventually be written in JavaScript.
 
 ***
@@ -35,32 +45,9 @@
 
 #### F# (with tooltips)
 
-*)
-let a = 5
-let factorial x = [1..x] |> List.reduce (*)
-let c = factorial a
-(** 
-`c` is evaluated for you
-*)
-(*** include-value: c ***)
-(**
-
---- 
-
-#### More F#
-
-*)
-[<Measure>] type sqft
-[<Measure>] type dollar
-let sizes = [|1700<sqft>;2100<sqft>;1900<sqft>;1300<sqft>|]
-let prices = [|53000<dollar>;44000<dollar>;59000<dollar>;82000<dollar>|] 
-(**
-
-#### `prices.[0]/sizes.[0]`
-
-*)
-(*** include-value: prices.[0]/sizes.[0] ***)
-(**
+    let a = 5
+    let factorial x = [1..x] |> List.reduce (*)
+    let c = factorial a
 
 ---
 
@@ -68,7 +55,6 @@ let prices = [|53000<dollar>;44000<dollar>;59000<dollar>;82000<dollar>|]
 
     [lang=cs]
     using System;
-
 
     class Program
     {
@@ -78,35 +64,36 @@ let prices = [|53000<dollar>;44000<dollar>;59000<dollar>;82000<dollar>|]
         }
     }
 
-
 ---
 
 #### JavaScript
 
     [lang=js]
     function copyWithEvaluation(iElem, elem) {
-      return function (obj) {
-          var newObj = {};
-          for (var p in obj) {
-              var v = obj[p];
-              if (typeof v === "function") {
-                  v = v(iElem, elem);
-              }
-              newObj[p] = v;
-          }
-          if (!newObj.exactTiming) {
-              newObj.delay += exports._libraryDelay;
-          }
-          return newObj;
-      };
+        return function (obj) {
+            var newObj = {};
+            for (var p in obj) {
+                var v = obj[p];
+                if (typeof v === "function") {
+                    v = v(iElem, elem);
+                }
+                newObj[p] = v;
+            }
+            if (!newObj.exactTiming) {
+                newObj.delay += exports._libraryDelay;
+            }
+            return newObj;
+        };
     }
+
 
 ---
 
 #### Haskell
  
     [lang=haskell]
-    recur_count k = 1 : 1 : zipWith recurAdd (recur_count k) (tail (recur_count k))
+    recur_count k = 1 : 1 : 
+        zipWith recurAdd (recur_count k) (tail (recur_count k))
             where recurAdd x y = k * x + y
 
     main = do
@@ -116,20 +103,51 @@ let prices = [|53000<dollar>;44000<dollar>;59000<dollar>;82000<dollar>|]
       let [n,k] = map read (words line)
       printf "%d\n" ((recur_count k) !! (n-1))
 
-
 *code from [NashFP/rosalind](https://github.com/NashFP/rosalind/blob/master/mark_wutka%2Bhaskell/FIB/fib_ziplist.hs)*
 
 ---
 
 ### SQL
- 
+
     [lang=sql]
-    select * 
-    from 
-      (select 1 as Id union all select 2 union all select 3) as X 
+    select *
+    from
+    (select 1 as Id union all select 2 union all select 3) as X
     where Id in (@Ids1, @Ids2, @Ids3)
 
-*sql from [Dapper](https://code.google.com/p/dapper-dot-net/)* 
+*sql from [Dapper](https://code.google.com/p/dapper-dot-net/)*
+
+---
+
+### Paket
+
+    [lang=paket]
+    source https://nuget.org/api/v2
+
+    nuget Castle.Windsor-log4net >= 3.2
+    nuget NUnit
+    
+    github forki/FsUnit FsUnit.fs
+      
+---
+
+### C/AL
+
+    [lang=cal]
+    PROCEDURE FizzBuzz(n : Integer) r_Text : Text[1024];
+    VAR
+      l_Text : Text[1024];
+    BEGIN
+      r_Text := '';
+      l_Text := FORMAT(n);
+
+      IF (n MOD 3 = 0) OR (STRPOS(l_Text,'3') > 0) THEN
+        r_Text := 'Fizz';
+      IF (n MOD 5 = 0) OR (STRPOS(l_Text,'5') > 0) THEN
+        r_Text := r_Text + 'Buzz';
+      IF r_Text = '' THEN
+        r_Text := l_Text;
+    END;
 
 ***
 
@@ -151,4 +169,3 @@ $ \Pr(A|B)=\frac{\Pr(B|A)\Pr(A)}{\Pr(B|A)\Pr(A)+\Pr(B|\neg A)\Pr(\neg A)} $
   
 *from [The Reality of a Developer's Life - in GIFs, Of Course](http://server.dzone.com/articles/reality-developers-life-gifs)*
 
-*)
